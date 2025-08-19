@@ -4,5 +4,10 @@ use anchor_lang::prelude::*;
 pub struct InitializeProfileEvent {
     pub profile: Pubkey,
     pub creator: Pubkey,
-    pub name: String,
+}
+
+#[event]
+pub struct UpdateProfileEvent {
+    pub profile: Pubkey,
+    pub creator: Pubkey,
 }

@@ -1,7 +1,7 @@
 use anchor_lang::prelude::*;
 
 #[error_code]
-pub enum InitializeProfileError {
+pub enum ProfileError {
     #[msg("Name exceeds maximum length")]
     NameTooLong,
     #[msg("Email exceeds maximum length")]
@@ -10,4 +10,6 @@ pub enum InitializeProfileError {
     BioTooLong,
     #[msg("About me exceeds maximum length")]
     AboutMeTooLong,
+    #[msg("No argument is provided")]
+    NoArgumentProvided,
 }

@@ -1,3 +1,5 @@
+use crate::errors::ProfileError;
+
 use anchor_lang::prelude::*;
 
 pub const NAME_LENGTH: usize = 25;
@@ -8,12 +10,6 @@ pub const ABOUT_ME_LENGTH: usize = 500;
 // pub const SOCIAL_LINK_LENGTH: usize = 64;
 
 pub const PROFILE_SEED: &str = "PROFILE";
-
-#[account]
-#[derive(InitSpace)]
-pub struct Game {
-    pub signer: Pubkey,
-}
 
 #[account]
 #[derive(InitSpace)]
@@ -29,4 +25,41 @@ pub struct Profile {
     pub about_me: String,
     // #[max_len(MAX_SOCIAL_LINKS, SOCIAL_LINK_LENGTH)]
     // pub social_links: Vec<String>,
+}
+
+impl Profile {
+    pub fn update(
+        &mut self,
+        name: Option<String>,
+        email: Option<String>,
+        bio: Option<String>,
+        about_me: Option<String>,
+    ) -> Result<()> {
+        if let Some(name) = name {
+            require!(
+                name.len() <= NAME_LENGTH,
+                ProfileError::NameTooLong
+            );
+            self.name = name;
+        }
+        if let Some(email) = email {
+            require!(
+                email.len() <= EMAIL_LENGTH,
+                ProfileError::EmailTooLong
+            );
+            self.email = email;
+        }
+        if let Some(bio) = bio {
+            require!(bio.len() <= BIO_LENGTH, ProfileError::BioTooLong);
+            self.bio = bio;
+        }
+        if let Some(about_me) = about_me {
+            require!(
+                about_me.len() <= ABOUT_ME_LENGTH,
+                ProfileError::AboutMeTooLong
+            );
+            self.about_me = about_me;
+        }
+        Ok(())
+    }
 }
