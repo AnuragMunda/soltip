@@ -1,8 +1,10 @@
 use anchor_lang::prelude::*;
 
-use crate::states::{Profile, PROFILE_SEED};
-use crate::errors::ProfileError;
-use crate::events::UpdateProfileEvent;
+use crate::{
+    utils::errors::ProfileError,
+    utils::events::UpdateProfileEvent,
+    states::{Profile, PROFILE_SEED},
+};
 
 pub fn update_creator_profile(
     ctx: Context<UpdateCreatorProfile>,
@@ -15,7 +17,10 @@ pub fn update_creator_profile(
     let creator_key = ctx.accounts.creator.key();
 
     require!(creator_key == profile.creator, ProfileError::Unauthorized);
-    require!(name.is_some() || email.is_some() || bio.is_some() || about_me.is_some(), ProfileError::NoArgumentProvided);
+    require!(
+        name.is_some() || email.is_some() || bio.is_some() || about_me.is_some(),
+        ProfileError::NoArgumentProvided
+    );
 
     profile.update(name, email, bio, about_me)?;
 

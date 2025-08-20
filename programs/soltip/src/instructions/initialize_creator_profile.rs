@@ -1,8 +1,6 @@
 use anchor_lang::prelude::*;
 
-use crate::errors::ProfileError;
-use crate::events::InitializeProfileEvent;
-use crate::states::profile::*;
+use crate::{utils::events::InitializeProfileEvent, states::profile::*};
 
 pub fn initialize_creator_profile(
     ctx: Context<InitializeCreatorProfile>,
@@ -14,25 +12,7 @@ pub fn initialize_creator_profile(
     let creator_profile = &mut ctx.accounts.profile;
     let creator_key = ctx.accounts.creator.key();
 
-    require!(
-        name.len() <= NAME_LENGTH,
-        ProfileError::NameTooLong
-    );
-    require!(
-        email.len() <= EMAIL_LENGTH,
-        ProfileError::NameTooLong
-    );
-    require!(bio.len() <= BIO_LENGTH, ProfileError::NameTooLong);
-    require!(
-        about_me.len() <= ABOUT_ME_LENGTH,
-        ProfileError::NameTooLong
-    );
-
-    creator_profile.creator = creator_key;
-    creator_profile.name = name.clone();
-    creator_profile.email = email;
-    creator_profile.bio = bio;
-    creator_profile.about_me = about_me;
+    creator_profile.update(Some(name), Some(email), Some(bio), Some(about_me))?;
 
     emit!(InitializeProfileEvent {
         profile: creator_profile.key(),

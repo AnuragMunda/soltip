@@ -1,14 +1,11 @@
 use anchor_lang::prelude::*;
 
-use crate::events::CloseProfileEvent;
-use crate::states::profile::*;
+use crate::{utils::events::CloseProfileEvent, states::profile::*};
 
 pub fn close_creator_profile(ctx: Context<CloseCreatorProfile>) -> Result<()> {
     let creator = &ctx.accounts.creator;
     let sol = ctx.accounts.profile.get_lamports();
-    ctx.accounts
-        .profile
-        .close(creator.to_account_info())?;
+    ctx.accounts.profile.close(creator.to_account_info())?;
 
     emit!(CloseProfileEvent {
         creator: creator.key(),

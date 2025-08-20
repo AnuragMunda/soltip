@@ -1,8 +1,7 @@
 use crate::instructions::*;
 use anchor_lang::prelude::*;
 
-pub mod errors;
-pub mod events;
+pub mod utils;
 pub mod instructions;
 pub mod states;
 

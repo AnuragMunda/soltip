@@ -1,8 +1,10 @@
 use anchor_lang::prelude::*;
 use anchor_lang::system_program::{transfer, Transfer};
 
-use crate::errors::ProfileError;
-use crate::states::{Profile, PROFILE_SEED};
+use crate::{
+    utils::errors::ProfileError,
+    states::{Profile, PROFILE_SEED},
+};
 
 pub fn withdraw_funds(ctx: Context<WithdrawFunds>) -> Result<()> {
     let profile = &mut ctx.accounts.profile;

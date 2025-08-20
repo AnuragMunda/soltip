@@ -4,8 +4,8 @@ use anchor_lang::{
 };
 
 use crate::{
-    errors::SupporterError,
-    events::SupportCreatorEvent,
+    utils::errors::SupporterError,
+    utils::events::SupportCreatorEvent,
     states::{supporter::*, Profile},
 };
 

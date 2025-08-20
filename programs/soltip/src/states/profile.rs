@@ -1,6 +1,6 @@
-use crate::errors::ProfileError;
-
 use anchor_lang::prelude::*;
+
+use crate::utils::errors::ProfileError;
 
 pub const NAME_LENGTH: usize = 25;
 pub const BIO_LENGTH: usize = 100;
@@ -26,7 +26,7 @@ pub struct Profile {
     // #[max_len(MAX_SOCIAL_LINKS, SOCIAL_LINK_LENGTH)]
     // pub social_links: Vec<String>,
     pub coin_value: u64,
-    pub supporter_count: u64
+    pub supporter_count: u64,
 }
 
 impl Profile {
@@ -38,17 +38,11 @@ impl Profile {
         about_me: Option<String>,
     ) -> Result<()> {
         if let Some(name) = name {
-            require!(
-                name.len() <= NAME_LENGTH,
-                ProfileError::NameTooLong
-            );
+            require!(name.len() <= NAME_LENGTH, ProfileError::NameTooLong);
             self.name = name;
         }
         if let Some(email) = email {
-            require!(
-                email.len() <= EMAIL_LENGTH,
-                ProfileError::EmailTooLong
-            );
+            require!(email.len() <= EMAIL_LENGTH, ProfileError::EmailTooLong);
             self.email = email;
         }
         if let Some(bio) = bio {
