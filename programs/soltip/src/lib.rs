@@ -40,9 +40,9 @@ pub mod soltip {
         update_coin_value(ctx, value)
     }
 
-    // pub fn withdraw_coins(ctx: Context) -> Result {
-    //     todo!()
-    // }
+    pub fn withdraw_coins(ctx: Context<WithdrawFunds>) -> Result<()> {
+        withdraw_funds(ctx)
+    }
 
     // pub fn support_creator(ctx: Context) -> Result<()> {
     //     todo!()

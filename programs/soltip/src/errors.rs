@@ -12,6 +12,10 @@ pub enum ProfileError {
     AboutMeTooLong,
     #[msg("No argument is provided")]
     NoArgumentProvided,
+    #[msg("User not authorized to take the action")]
+    Unauthorized,
     #[msg("Coin value must be greater than 0")]
     InvalidCoinValue,
+    #[msg("No funds available")]
+    InsufficientFunds,
 }

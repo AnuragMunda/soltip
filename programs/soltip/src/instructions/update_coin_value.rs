@@ -5,9 +5,10 @@ use crate::events::UpdateCoinValueEvent;
 use crate::states::{Profile, PROFILE_SEED};
 
 pub fn update_coin_value(ctx: Context<UpdateCoinValue>, value: u64) -> Result<()> {
-    require!(value > 0, ProfileError::InvalidCoinValue);
-
     let profile = &mut ctx.accounts.profile;
+
+    require!(ctx.accounts.creator.key() == profile.creator, ProfileError::Unauthorized);
+    require!(value > 0, ProfileError::InvalidCoinValue);
 
     profile.coin_value = value;
 

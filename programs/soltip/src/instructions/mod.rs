@@ -9,3 +9,6 @@ pub mod close_creator_profile;
 
 pub use update_coin_value::*;
 pub mod update_coin_value;
+
+pub use withdraw_funds::*;
+pub mod withdraw_funds;

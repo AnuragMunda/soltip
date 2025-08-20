@@ -11,13 +11,17 @@ pub fn update_creator_profile(
     bio: Option<String>,
     about_me: Option<String>,
 ) -> Result<()> {
+    let profile = &mut ctx.accounts.profile;
+    let creator_key = ctx.accounts.creator.key();
+
+    require!(creator_key == profile.creator, ProfileError::Unauthorized);
     require!(name.is_some() || email.is_some() || bio.is_some() || about_me.is_some(), ProfileError::NoArgumentProvided);
 
-    ctx.accounts.profile.update(name, email, bio, about_me)?;
+    profile.update(name, email, bio, about_me)?;
 
     emit!(UpdateProfileEvent {
-        profile: ctx.accounts.profile.key(),
-        creator: ctx.accounts.creator.key(),
+        profile: profile.key(),
+        creator: creator_key,
     });
 
     Ok(())
