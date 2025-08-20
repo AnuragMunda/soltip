@@ -25,6 +25,7 @@ pub struct Profile {
     pub about_me: String,
     // #[max_len(MAX_SOCIAL_LINKS, SOCIAL_LINK_LENGTH)]
     // pub social_links: Vec<String>,
+    pub coin_value: u64
 }
 
 impl Profile {

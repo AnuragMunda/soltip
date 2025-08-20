@@ -17,3 +17,9 @@ pub struct CloseProfileEvent {
     pub creator: Pubkey,
     pub sol_transferred: u64,
 }
+
+#[event]
+pub struct UpdateCoinValueEvent {
+    pub profile: Pubkey,
+    pub coin_value: u64,
+}

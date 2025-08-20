@@ -1,10 +1,10 @@
 use crate::instructions::*;
 use anchor_lang::prelude::*;
 
+pub mod errors;
 pub mod events;
 pub mod instructions;
 pub mod states;
-pub mod errors;
 
 declare_id!("BJy8cEtQ6PoXQUCgcCM1vGbi2PHWzn64YiMb3gnW92VC");
 
@@ -27,7 +27,7 @@ pub mod soltip {
         name: Option<String>,
         email: Option<String>,
         bio: Option<String>,
-        about_me: Option<String>
+        about_me: Option<String>,
     ) -> Result<()> {
         update_creator_profile(ctx, name, email, bio, about_me)
     }
@@ -36,9 +36,9 @@ pub mod soltip {
         close_creator_profile(ctx)
     }
 
-    // pub fn set_coin_value(ctx: Context) -> Result<()> {
-    //     todo!()
-    // }
+    pub fn set_coin_value(ctx: Context<UpdateCoinValue>, value: u64) -> Result<()> {
+        update_coin_value(ctx, value)
+    }
 
     // pub fn withdraw_coins(ctx: Context) -> Result {
     //     todo!()

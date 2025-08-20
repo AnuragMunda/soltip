@@ -12,4 +12,6 @@ pub enum ProfileError {
     AboutMeTooLong,
     #[msg("No argument is provided")]
     NoArgumentProvided,
+    #[msg("Coin value must be greater than 0")]
+    InvalidCoinValue,
 }
