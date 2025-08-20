@@ -22,13 +22,19 @@ pub mod soltip {
         initialize_creator_profile(ctx, name, email, bio, about_me)
     }
 
-    // pub fn update_profile(ctx: Context) -> Result<()> {
-    //     todo!()
-    // }
+    pub fn update_profile(
+        ctx: Context<UpdateCreatorProfile>,
+        name: Option<String>,
+        email: Option<String>,
+        bio: Option<String>,
+        about_me: Option<String>
+    ) -> Result<()> {
+        update_creator_profile(ctx, name, email, bio, about_me)
+    }
 
-    // pub fn close_profile(ctx: Context) -> Result<()> {
-    //     todo!()
-    // }
+    pub fn close_profile(ctx: Context<CloseCreatorProfile>) -> Result<()> {
+        close_creator_profile(ctx)
+    }
 
     // pub fn set_coin_value(ctx: Context) -> Result<()> {
     //     todo!()
