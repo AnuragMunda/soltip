@@ -12,3 +12,6 @@ pub mod update_coin_value;
 
 pub use withdraw_funds::*;
 pub mod withdraw_funds;
+
+pub use tip_creator::*;
+pub mod tip_creator;

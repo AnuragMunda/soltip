@@ -23,3 +23,10 @@ pub struct UpdateCoinValueEvent {
     pub profile: Pubkey,
     pub coin_value: u64,
 }
+
+#[event]
+pub struct SupportCreatorEvent {
+    pub creator: Pubkey,
+    pub supporter: Pubkey,
+    pub amount: u64,
+}

@@ -44,7 +44,12 @@ pub mod soltip {
         withdraw_funds(ctx)
     }
 
-    // pub fn support_creator(ctx: Context) -> Result<()> {
-    //     todo!()
-    // }
+    pub fn support_creator(
+        ctx: Context<TipCreator>,
+        amount: u64,
+        name: Option<String>,
+        message: Option<String>
+    ) -> Result<()> {
+        tip_creator(ctx, amount, name, message)
+    }
 }

@@ -19,3 +19,13 @@ pub enum ProfileError {
     #[msg("No funds available")]
     InsufficientFunds,
 }
+
+#[error_code]
+pub enum SupporterError {
+    #[msg("Name exceeds maximum length")]
+    NameTooLong,
+    #[msg("Message exceeds maximum length")]
+    MessageTooLong,
+    #[msg("Amount must be greater than 0")]
+    InvalidAmount
+}
